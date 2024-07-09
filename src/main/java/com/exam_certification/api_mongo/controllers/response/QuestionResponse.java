@@ -1,0 +1,14 @@
+package com.exam_certification.api_mongo.controllers.response;
+
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
+@Data
+@Getter
+@Setter
+public class QuestionResponse {
+
+    private String id;
+    private String text;
+}
