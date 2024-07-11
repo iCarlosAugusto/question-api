@@ -13,9 +13,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Course {
-
-    @Id
-    private String id;
+public class Course extends BaseEntity {
     private String name;
+    private String courseCategoryId;
 }

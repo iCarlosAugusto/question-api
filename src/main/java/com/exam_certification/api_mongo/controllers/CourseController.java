@@ -24,8 +24,7 @@ public class CourseController {
     QuestionService questionService;
 
     @PostMapping
-    ResponseEntity<CourseResponse> createCourse(@RequestBody CourseRequest courseRequest) {
-        System.out.println("trigged!!!");
+    ResponseEntity<CourseResponse> createCourse(@RequestBody CourseRequest courseRequest) throws Exception {
         return ResponseEntity.ok().body(courseService.createCourse(courseRequest));
     }
 
