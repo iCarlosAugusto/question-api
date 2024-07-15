@@ -8,6 +8,8 @@ import com.exam_certification.api_mongo.services.CourseService;
 import com.exam_certification.api_mongo.services.QuestionService;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +30,12 @@ public class CourseController {
         return ResponseEntity.ok().body(courseService.createCourse(courseRequest));
     }
 
-    @GetMapping
-    ResponseEntity<List<CourseResponse>> getAllCourses() {
-        return ResponseEntity.ok().body(courseService.getAllCourses());
+    @GetMapping("/{categoryCourseId}")
+    ResponseEntity<Page<List<Course>>> getAllCourses(
+            @PathVariable("categoryCourseId") String categoryCourseId,
+            @PageableDefault(size = 10, page = 0) Pageable pageable
+    ) {
+        return ResponseEntity.ok().body(courseService.getAllCourses(categoryCourseId, pageable));
     }
 
     @GetMapping("/{courseId}/questions")

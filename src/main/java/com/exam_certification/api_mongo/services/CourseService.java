@@ -8,6 +8,8 @@ import com.exam_certification.api_mongo.controllers.response.CourseResponse;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -41,11 +43,8 @@ public class CourseService {
         return mapper.map(newCourse, CourseResponse.class);
     }
 
-    public List<CourseResponse> getAllCourses() {
-        List<Course> courses = courseRepository.findAll();
-        return courses.stream()
-                .map(el -> mapper.map(el, CourseResponse.class))
-                .toList();
+    public Page<List<Course>> getAllCourses(String categoryCourseId, Pageable pageable) {
+        return courseRepository.findByCourseCategoryId(categoryCourseId, pageable);
     }
 
     public Optional<Course> getCourseById(String id) {
