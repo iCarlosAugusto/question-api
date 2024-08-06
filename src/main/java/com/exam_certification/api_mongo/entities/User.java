@@ -27,6 +27,10 @@ public class User {
     @Field
     private String email;
 
+    @Field
+    private String password;
+
+
     private Set<RepliedQuestion> repliedQuestions = new HashSet<>();
 
 }
