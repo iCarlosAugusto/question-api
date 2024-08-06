@@ -13,7 +13,7 @@ public class UserService {
     UserRepository userRepository;
 
     public User createUser(UserRequest userRequest){
-        User user = new User(userRequest);
+       User user = userRequest.toEntity();
         return userRepository.save(user);
     }
 }

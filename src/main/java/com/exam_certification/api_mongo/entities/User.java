@@ -24,9 +24,9 @@ public class User {
     @Field
     private String name;
 
+    @Field
+    private String email;
+
     private Set<RepliedQuestion> repliedQuestions = new HashSet<>();
 
-    public User(UserRequest userRequest){
-        this.name = userRequest.getName();
-    }
 }
