@@ -1,6 +1,7 @@
 package com.exam_certification.api_mongo.services;
 
 
+import com.exam_certification.api_mongo.controllers.request.CreateCategoryCourseRequest;
 import com.exam_certification.api_mongo.entities.Course;
 import com.exam_certification.api_mongo.entities.CourseCategory;
 import com.exam_certification.api_mongo.repositories.CourseCategoryRepository;
@@ -19,9 +20,8 @@ public class CourseCategoryService {
     @Autowired
     final private CourseCategoryRepository courseCategoryRepository;
 
-    public CourseCategory create() {
-        CourseCategory courseCategory = new CourseCategory();
-        courseCategory.setName("Cloud");
+    public CourseCategory create(CreateCategoryCourseRequest createCategoryCourseRequest) {
+        CourseCategory courseCategory = createCategoryCourseRequest.toEntity();
         return this.courseCategoryRepository.save(courseCategory);
     }
 

@@ -1,5 +1,6 @@
 package com.exam_certification.api_mongo.controllers;
 
+import com.exam_certification.api_mongo.controllers.request.CreateCategoryCourseRequest;
 import com.exam_certification.api_mongo.entities.CourseCategory;
 import com.exam_certification.api_mongo.services.CourseCategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +33,7 @@ public class CourseCategoryController {
     }
 
     @PostMapping
-    ResponseEntity<CourseCategory> createCategoryCourse() {
-        return ResponseEntity.ok().body(this.courseCategoryService.create());
+    ResponseEntity<CourseCategory> createCategoryCourse(@RequestBody CreateCategoryCourseRequest createCategoryCourseRequest) {
+        return ResponseEntity.ok().body(this.courseCategoryService.create(createCategoryCourseRequest));
     }
 }

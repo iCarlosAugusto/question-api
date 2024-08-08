@@ -48,13 +48,13 @@ public class QuestionService {
         return false;
     }
 
-    public QuestionResponse createQuestion(QuestionRequest questionRequest) throws Exception {
-        Course course = courseService.getCourseById(questionRequest.getCourseId()).orElseThrow(() -> new Exception("Id do curso não existe"));
+    public QuestionResponse createQuestion(QuestionRequest questionRequest, String courseId) throws Exception {
+        Course course = courseService.getCourseById(courseId).orElseThrow(() -> new Exception("Id do curso não existe"));
         boolean isQuestionValid = validateQuestion(questionRequest);
         if(!isQuestionValid){
             throw new Exception("Questão inválida, verifique o questionType");
         }
-        Question question = new Question(questionRequest);
+        Question question = questionRequest.toEntity();
         question.setCourse(course);
         Question questionCreated = questionRepository.save(question);
         return mapper.map(questionCreated, QuestionResponse.class);

@@ -25,7 +25,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/api/questions")
+@RequestMapping("/api")
 public class QuestionController {
 
     @Autowired
@@ -37,22 +37,12 @@ public class QuestionController {
     @Autowired
     MongoTemplate mongoTemplate;
 
-//    @PostMapping("/test")
-//    Optional<?>teste(@RequestBody QuestionRequest questionRequest) throws Exception {
-//
-////        Query query = new Query();
-////        query.addCriteria(Criteria.where("name").is("Carlos"));
-////        //query.fields().exclude("_id");
-////        List<User> users = mongoTemplate.find(query, User.class);
-////        return users;
-//        //ObjectId.
-//        return userRepository.findUserRepliedQuestion("666f775456b8504286619381");
-//        //return users;
-//    }
-
-    @PostMapping
-    ResponseEntity<QuestionResponse> createQuestion(@RequestBody QuestionRequest questionRequest) throws Exception {
-        return ResponseEntity.ok().body(questionService.createQuestion(questionRequest));
+    @PostMapping("courses/{courseId}/questions")
+    ResponseEntity<QuestionResponse> createQuestion(
+            @PathVariable("courseId") String courseId,
+            @RequestBody QuestionRequest questionRequest
+    ) throws Exception {
+        return ResponseEntity.ok().body(questionService.createQuestion(questionRequest, courseId));
     }
 
     @GetMapping
